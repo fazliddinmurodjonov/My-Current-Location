@@ -7,13 +7,14 @@ import androidx.room.PrimaryKey
 class Location {
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null
-    var longitude: Double? = null
     var latitude: Double? = null
 
+    var longitude: Double? = null
+
     constructor()
-    constructor(longitude: Double?, latitude: Double?) {
-        this.longitude = longitude
+    constructor( latitude: Double?,longitude: Double?) {
         this.latitude = latitude
+        this.longitude = longitude
     }
 
 }

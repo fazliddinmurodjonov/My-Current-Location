@@ -9,9 +9,11 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polyline
+import com.google.android.gms.maps.model.PolylineOptions
 import com.programmsoft.mycurrentlocation.databinding.ActivityMapsBinding
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnPolylineClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -38,11 +40,44 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+//        mMap = googleMap
+//        // Add a marker in Sydney and move the camera
+//        val sydney = LatLng(-34.0, 151.0)
+//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        // Add polylines to the map.
+        // Polylines are useful to show a route or some other connection between points.
+        var list = ArrayList<LatLng>()
+
+        var l1 = LatLng(-35.016, 143.321)
+        var l2 = LatLng(-34.747, 145.592)
+        var l3 = LatLng(-34.364, 147.891)
+        var l4 = LatLng(-33.501, 150.217)
+        var l5 = LatLng(-32.306, 149.248)
+        var l6 = LatLng(-32.491, 147.309)
+        list.add(l1)
+        list.add(l2)
+        list.add(l3)
+        list.add(l4)
+        list.add(l5)
+        list.add(l6)
+        val toTypedArray = list.toTypedArray()
+        val polyline1 = googleMap.addPolyline(PolylineOptions()
+            .clickable(true)
+            .addAll(list))
+
+        // Position the map's camera near Alice Springs in the center of Australia,
+        // and set the zoom factor so most of Australia shows on the screen.
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(-33.684, 150.903), 6f))
+
+        // Set listeners for click events.
+        googleMap.setOnPolylineClickListener(this)
+
+    }
+
+    override fun onPolylineClick(p0: Polyline) {
+
     }
 }
