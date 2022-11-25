@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Toast.makeText(this, requestCode.toString(), Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, requestCode.toString(), Toast.LENGTH_LONG).show()
         when (requestCode) {
             MY_FINE_LOCATION_REQUEST -> {
 

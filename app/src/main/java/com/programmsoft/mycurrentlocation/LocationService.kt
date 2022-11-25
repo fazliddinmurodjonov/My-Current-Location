@@ -25,10 +25,10 @@ class LocationService : Service() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val locationRequest: LocationRequest = create().apply {
-        interval = 8000
-        fastestInterval = 8000
+        interval = 300000
+        fastestInterval = 300000
         priority = PRIORITY_BALANCED_POWER_ACCURACY
-        maxWaitTime = 10000
+        maxWaitTime = 400000
     }
 
     private var locationCallback: LocationCallback = object : LocationCallback() {
@@ -37,11 +37,11 @@ class LocationService : Service() {
             if (locationList.isNotEmpty()) {
                 val location = locationList.last()
                 var l = Location()
-                l.longitude = location.longitude
                 l.latitude = location.latitude
+                l.longitude = location.longitude
                 db.locationDao().insert(l)
-//                Toast.makeText(this@LocationService, "Latitude: " + location.latitude.toString() + '\n' +
-//                        "Longitude: "+ location.longitude, Toast.LENGTH_LONG).show()
+                Toast.makeText(this@LocationService, "Latitude: " + location.latitude.toString() + '\n' +
+                        "Longitude: "+ location.longitude, Toast.LENGTH_LONG).show()
 //                Log.d("Location d", location.latitude.toString())
 //                Log.i("Location i", location.latitude.toString())
             }
